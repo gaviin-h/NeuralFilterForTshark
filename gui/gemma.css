@@ -1,0 +1,23 @@
+p{
+    color: white;
+}
+h1{
+    color: rgb(212, 67, 67);
+    text-shadow: 3px, 3px, 1px grey;
+}
+html{
+    background-color: rgb(41, 44, 41);
+}
+div{
+    background-color: rgba(190, 69, 69, 0.199);
+    border: 5px rgba(190, 69, 69);
+    height: 100px;
+}
+#left{
+    float: left;
+    width: 15%;
+}
+#right{
+    float: right;
+    width: 85%
+}

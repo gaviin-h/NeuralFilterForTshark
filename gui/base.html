@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>  
+    <head>
+        <meta charset="UTF-8">
+        <link href="{{ url_for('static',filename='gemma.css') }}" rel="stylesheet">
+        <title>0.0.1</title>
+    </head>
+    <body>
+        <div id="left">
+            <img type='image' src="{{ url_for('static',filename='images/gemma-logu.png') }}" width="150" height="150" alt="my logo">
+        </div>
+        <div id="right">
+            <h1>Neural Filter Tool for Wireshark</h1>
+        </div>     
+        {% block body %} {% endblock %}
+    </body> 
+</html>

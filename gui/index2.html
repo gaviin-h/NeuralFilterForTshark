@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %} 
+<br>
+<div id='left'>
+    <form method='post'>
+        <label for="interface">Interface:</label>
+        <select name="interface">
+            <option disabled selected value="">select</option>
+            <option value='en0'>en0</option>
+        </select><br>
+        <input type="submit" value="Run" id='run'>
+    </form>
+</div>
+<div id='right'> 
+    <p>This is the latest output: <span id="latest"></span></p>
+    <p>This is all the output:</p>
+    <ul id="output"></ul>
+</div>
+<script scr='live.js'></script>
+
+{% endblock %}
