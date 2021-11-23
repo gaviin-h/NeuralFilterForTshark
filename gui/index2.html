@@ -10,13 +10,14 @@
             <option value='en0'>en0</option>
         </select><br>
         <input type="submit" value="Run" id='run'>
+        <button type="button" id='btn'> Start! </button>
     </form>
 </div>
 <div id='right'> 
     <p>This is the latest output: <span id="latest"></span></p>
     <p>This is all the output:</p>
     <ul id="output"></ul>
+    <script src="{{ url_for('static', filename='live.js') }}">
+    </script>
 </div>
-<script scr='live.js'></script>
-
 {% endblock %}
