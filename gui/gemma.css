@@ -21,3 +21,17 @@ div{
     float: right;
     width: 85%
 }
+.listbox-area{
+    height: 300px;
+    width: 600px;
+    overflow: scroll;
+    background-color: blanchedalmond;
+    padding-top: 20px;
+    border: 1px solid rgba(190, 69, 69)
+}
+#ss_elem{
+    height: 30px;
+}
+li{
+    list-style-type: none;
+}

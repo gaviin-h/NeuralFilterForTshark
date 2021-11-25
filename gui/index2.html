@@ -3,20 +3,28 @@
 {% block body %} 
 <br>
 <div id='left'>
-    <form method='post'>
-        <label for="interface">Interface:</label>
-        <select name="interface">
+    <form>
+        <label>Interface:</label>
+        <select id="interface">
             <option disabled selected value="">select</option>
             <option value='en0'>en0</option>
         </select><br>
-        <input type="submit" value="Run" id='run'>
         <button type="button" id='btn'> Start! </button>
     </form>
 </div>
 <div id='right'> 
     <p>This is the latest output: <span id="latest"></span></p>
     <p>This is all the output:</p>
-    <ul id="output"></ul>
+    <br><br><br>
+    <div class='listbox-area'>
+        <span id='ss_elem'>
+            Captured Packets:
+        </span>
+        <ul id='ss_elem_list'
+            role='listbox'>
+        </ul>
+
+    </div>
     <script src="{{ url_for('static', filename='live.js') }}">
     </script>
 </div>

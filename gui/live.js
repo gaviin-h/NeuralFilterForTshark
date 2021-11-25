@@ -1,15 +1,13 @@
 let btn = document.getElementById('btn')
 let iface = document.getElementById('interface')
 let latest = document.getElementById('latest')
-let output = document.getElementById('output')
+let output = document.getElementById('ss_elem_list')
 let xhr = new XMLHttpRequest()
 
 btn.addEventListener('click', () => {
-    alert("js working")
+    xhr.open('GET', 'run', true)
+    xhr.send();
 })
-
-xhr.open('GET', 'stream', true)
-xhr.send();
 
 var position=0
 function handleNewData(){
@@ -20,7 +18,7 @@ function handleNewData(){
         item.textContent=value
         output.appendChild(item);
     })
-    position = messages.length-1
+    position = messages.length-1;
 }
 
 var timer
@@ -28,6 +26,6 @@ timer=setInterval(function() {
     handleNewData()
     if(xhr.readyState==XMLHttpRequest.DONE) {
         clearInterval(timer)
-        latest.textContent = 'Done';
+        latest.textContent = 'Stopped';
     }
 }, 500)
