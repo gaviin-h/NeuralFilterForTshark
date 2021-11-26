@@ -1,9 +1,17 @@
 let btn = document.getElementById('btn')
+let btn2 = document.getElementById('btn2')
 let iface = document.getElementById('interface')
 let latest = document.getElementById('latest')
 let output = document.getElementById('ss_elem_list')
 let xhr = new XMLHttpRequest()
+let post = new XMLHttpRequest()
 
+btn2.addEventListener('click', () => {
+    post.open('POST', 'run')
+    var i = iface.selectedIndex
+    post.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+    post.send('iface=' + iface.options[i].value)
+})
 btn.addEventListener('click', () => {
     xhr.open('GET', 'run', true)
     xhr.send();
@@ -21,7 +29,7 @@ function handleNewData(){
     position = messages.length-1;
 }
 
-var timer
+var timer 
 timer=setInterval(function() {
     handleNewData()
     if(xhr.readyState==XMLHttpRequest.DONE) {
