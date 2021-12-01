@@ -5,7 +5,9 @@ from flask import render_template, request
 from flask.app import Flask
 from Tshark import Tshark
 from time import sleep
-
+go_ahead=True
+g_iface=''
+g_t='n'
 app = Flask(__name__, template_folder='../gui', static_folder='../gui')
 
 # base route
@@ -18,24 +20,39 @@ def home():
 def run():
     # Generates the tshark output 
     def generate(interface):
+        global go_ahead
+        from tokenizer import tokenize
         p=Tshark()
-        proc=p.start(interface)
+        proc=p.start(g_iface)
         while True:
             line=proc.stdout.readline()
-            if not line:
+            if not go_ahead:
+                proc.terminate()
                 break
+            line=str(line)
+            if g_t=='t':
+                line=tokenize(line)
             yield str(line)+'\n'
     if request.method=='POST':
-        iface=request.form['iface']
-        f=open('data.txt', 'w')
-        f.write(iface)
-        f.close()
+        global go_ahead
+        go_ahead=True
+        global g_iface
+        g_iface=request.form['iface']
+        global g_t
+        g_t=request.form['t']
         return "recieved"
     else:
         f=open('data.txt', 'r')
         iface=f.readline()
         f.close()
         return app.response_class(generate(iface), mimetype="text/plain")
+
+@app.route('/stop', methods=['POST'])
+def stop():
+    if request.method=='POST':
+        global go_ahead
+        go_ahead=False
+        return 'stopped'
 
 # For testing purposes
 @app.route('/stream', methods=['GET'])

@@ -1,22 +1,21 @@
 let btn = document.getElementById('btn')
-let btn2 = document.getElementById('btn2')
+let token = document.getElementById('token')
 let iface = document.getElementById('interface')
 let latest = document.getElementById('latest')
 let output = document.getElementById('ss_elem_list')
 let xhr = new XMLHttpRequest()
 let post = new XMLHttpRequest()
 
-btn2.addEventListener('click', () => {
+btn.addEventListener('click', () => {
     post.open('POST', 'run')
     var i = iface.selectedIndex
+    var t = 'n'
+    if(token.checked) t = 't'
     post.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
-    post.send('iface=' + iface.options[i].value)
-})
-btn.addEventListener('click', () => {
-    xhr.open('GET', 'run', true)
+    post.send('iface=' + iface.options[i].value+'&t='+t)
+    xhr.open('GET', 'run')
     xhr.send();
 })
-
 var position=0
 function handleNewData(){
     var messages=xhr.responseText.split('\n')

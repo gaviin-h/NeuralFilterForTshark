@@ -8,10 +8,16 @@
         <select id="interface">
             <option disabled selected value="">select</option>
             <option value='en0'>en0</option>
+            <option value='p2p0'>p2p0</option>
+            <option value='awdl0'>awdl0</option>
+            <option value='loopback'>loopback</option>
         </select><br>
-        <button type="button" id='btn2'> Send! </button>
-        <br>
         <button type="button" id='btn'> Start! </button>
+        <br>
+        <input type='checkbox' id='token'>Tokenize</input>
+    </form>
+    <form action='/stop' method='post'>
+        <input type='submit' value='Stop!'>
     </form>
 </div>
 <div id='right'> 
