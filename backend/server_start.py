@@ -3,11 +3,14 @@ import math
 import subprocess
 from flask import render_template, request 
 from flask.app import Flask
+from flask.typing import ResponseReturnValue
+from werkzeug import datastructures
 from Tshark import Tshark
 from time import sleep
 go_ahead=True
 g_iface=''
 g_t='n'
+data=''
 app = Flask(__name__, template_folder='../gui', static_folder='../gui')
 
 # base route
@@ -19,7 +22,7 @@ def home():
 @app.route('/run', methods=['GET', 'POST'])
 def run():
     # Generates the tshark output 
-    def generate(interface):
+    def generate():
         global go_ahead
         from tokenizer import tokenize
         p=Tshark()
@@ -28,6 +31,8 @@ def run():
             line=proc.stdout.readline()
             if not go_ahead:
                 proc.terminate()
+                global data
+                data = proc.stdout.read().split(b'\n')
                 break
             line=str(line)
             if g_t=='t':
@@ -42,17 +47,22 @@ def run():
         g_t=request.form['t']
         return "recieved"
     else:
-        f=open('data.txt', 'r')
-        iface=f.readline()
-        f.close()
-        return app.response_class(generate(iface), mimetype="text/plain")
+        return app.response_class(generate(), mimetype="text/plain")
 
 @app.route('/stop', methods=['POST'])
 def stop():
-    if request.method=='POST':
-        global go_ahead
-        go_ahead=False
-        return 'stopped'
+    global go_ahead
+    go_ahead=False
+    return 'stopped'
+
+@app.route('/save', methods=['POST'])
+def save():
+    global data
+    path=request.form['name']
+    # file=open(path, 'w')
+    # for line in data:
+    #     file.write(line)    
+    return [path]
 
 # For testing purposes
 @app.route('/stream', methods=['GET'])
