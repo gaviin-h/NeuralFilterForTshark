@@ -1,9 +1,20 @@
 import math
 
-def tokenize(line):
+def tokenize_n(line):
+    vec=line[2:-1].split()
+    vec=vec[1:]
+    v=[float(vec[0])]
+    v.append(addr(vec[1]))
+    v.append(addr(vec[3]))
+    v.append(prot(vec[4]))
+    v.append(float(vec[5]))
+    v.append(desc(vec[6:]))
+    return v 
+
+def tokenize_f(line):
     vec=line.split()
-    vec=vec[2:-2]
-    v=[]
+    vec=vec[1:]
+    v=[float(vec[0])]
     v.append(addr(vec[1]))
     v.append(addr(vec[3]))
     v.append(prot(vec[4]))

@@ -5,6 +5,7 @@ let iface = document.getElementById('interface')
 let latest = document.getElementById('latest')
 let output = document.getElementById('ss_elem_list')
 let btn3 = document.getElementById('btn3')
+// const prompt = require('electron-prompt')
 let stop = new XMLHttpRequest()
 let xhr = new XMLHttpRequest()
 let post = new XMLHttpRequest()
@@ -25,21 +26,36 @@ btn2.addEventListener('click', () =>{
     stop.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
     stop.send()
 })
+let directoryHandle 
+let filename
 btn3.addEventListener('click', ()=>{
-    getPath()  
-    // save.open('POST', 'save')
-    // save.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
-    // save.send('name=' + name)
+    directoryHandle = getPath()
+    directoryHandle.then(function(results){
+        // prompt({
+        //     title: 'file name',
+        //     value: 'untitled.txt',
+        //     type: 'input'
+        // }).then((r) => {
+        //     filename=r
+        // })
+        filename=prompt('file name:', 'untitled.txt')
+        save.open('POST', 'save')
+        save.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+        save.send('name=' + '/Users/gavin/Desktop/' + results['name'] +"/"+ filename)
+    })
 })
 
 var position=0
 function handleNewData(){
     var messages=xhr.responseText.split('\n')
     messages.slice(position, -1).forEach(function(value) {
-        value=String(value).substring(1,value.length-2)
+        let anom=false
+        if(value[0]==='0'){anom=true}
+        value=String(value).substring(3,value.length-2)
         latest.textContent = value
         var item = document.createElement('li')
         item.textContent=value
+        item.className=String(anom)
         output.appendChild(item);
     })
     position = messages.length-1;
@@ -55,6 +71,11 @@ timer=setInterval(function() {
 }, 500)
 
 async function getPath(){
-    var Dir = await Window.showDirectoryPicker();
-    console.log(Dir)
+    try{
+        return await window.showDirectoryPicker({
+            startIn: 'desktop'
+        })
+    } catch(e){
+        console.log(e)
+    }
 }

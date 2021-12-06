@@ -35,3 +35,9 @@ div{
 li{
     list-style-type: none;
 }
+.true{
+    color:rgb(212, 67, 67);
+}
+.false{
+    color: rgb(41, 44, 41);
+}
