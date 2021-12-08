@@ -1,17 +1,18 @@
 <body>
-    <p id="filename"></p>
+    <p id="WARNING!"></p>
+    <h1>WARNING! Your data is unsaved, would you like to go back and save?</h1>
     <p>
         <input type = "button" id="goback" value="Go Back" onclick="back()">
-        <input type = "button" value="nope" value='nope' onclick="nope()">
+        <input type = "button" id="nope" value='nope' onclick="nope()">
     </p>
     
     <script>
     function nope() {
-        window.opener.postMessage(document.getElementById('nope').value, '*')
+        window.opener.postMessage(document.getElementById('nope').id, '*')
         this.close();
     }
     function back() {
-        window.opener.postMessage(document.getElementById('goback').value, '*')
+        window.opener.postMessage(document.getElementById('goback').id, '*')
         this.close();
     }
     </script>

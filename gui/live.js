@@ -8,35 +8,30 @@ let btn3 = document.getElementById('btn3')
 let box = document.getElementById('listbox')
 let backbtn = document.getElementById('backbtn')
 
-let stop = new XMLHttpRequest()
+let back = new XMLHttpRequest()
 let xhr = new XMLHttpRequest()
 let post = new XMLHttpRequest()
+let stop = new XMLHttpRequest()
 let save = new XMLHttpRequest()
-let back = new XMLHttpRequest()
 
 // Get data from the server
-let saved=false
+let saved=true
 let saveStop
+let play
 btn.addEventListener('click', () => {
-    // if(output.hasChildNodes && !saved){
-    //     // prompt user about the unsaved data
-    //     saveStop = window.open("not_saved","Ratting","width=550,height=170,left=150,top=200,toolbar=0,status=0,")
-    //     window.addEventListener('message', function(r){
-    //         if(r.data === 'goback'){
-    //             return null
-    //         }else{
-    //             continue
-    //         }
-    //     }, true)
-    // }
-    post.open('POST', 'run')
-    var i = iface.selectedIndex
-    var t = 'n'
-    if(token.checked) t = 't'
-    post.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
-    post.send('iface=' + iface.options[i].value+'&t='+t)
-    xhr.open('GET', 'run')
-    xhr.send();
+    if(!saved){
+        // prompt user about the unsaved data
+        saveStop = window.open("not_saved","Ratting","width=550,height=170,left=150,top=200,toolbar=0,status=0,")
+        window.addEventListener('message', function(r){
+            if(r.data === 'goback'){
+                return null
+            }else{
+                run()
+            }
+        }, true)
+    }else{
+        run()
+    }
 })
 
 // Stop the listener
@@ -88,10 +83,8 @@ function handleNewData(){
 
 // Listen for updates 
 var loading = false
-var timer 
-timer=setInterval(function() {
+var timer = setInterval(function() {
     if(xhr.readyState===XMLHttpRequest.DONE) {
-        clearInterval(timer)
         latest.textContent = 'Stopped';
     } 
     // else if(xhr.readyState===3 && loading){
@@ -107,7 +100,7 @@ timer=setInterval(function() {
     //     box.appendChild(loader)
     // }   
     handleNewData()
-}, 500)
+})
 
 // Get the directory to save in
 async function getPath(){
@@ -118,4 +111,17 @@ async function getPath(){
     } catch(e){
         console.log(e)
     }
+}
+// Run the Network traffic
+function run(){
+    output.innerHTML = ''
+    saved=false
+    post.open('POST', 'run')
+    var i = iface.selectedIndex
+    var t = 'n'
+    if(token.checked) t = 't'
+    post.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+    post.send('iface=' + iface.options[i].value+'&t='+t)
+    xhr.open('GET', 'run')
+    xhr.send();
 }
