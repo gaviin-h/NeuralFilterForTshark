@@ -4,9 +4,11 @@ let token = document.getElementById('token')
 let iface = document.getElementById('interface')
 let latest = document.getElementById('latest')
 let output = document.getElementById('ss_elem_list')
-let btn3 = document.getElementById('btn3')
-let box = document.getElementById('listbox')
+let savebtn = document.getElementById('btn3')
+let box = document.getElementById('ss_elem')
 let backbtn = document.getElementById('backbtn')
+let clear = document.getElementById('btn4')
+let packetCount = document.getElementById('packetcount')
 
 let back = new XMLHttpRequest()
 let xhr = new XMLHttpRequest()
@@ -28,7 +30,7 @@ btn.addEventListener('click', () => {
             }else{
                 run()
             }
-        }, true)
+        }, false)
     }else{
         run()
     }
@@ -45,7 +47,7 @@ btn2.addEventListener('click', () =>{
 let directoryHandle 
 let childHandle
 let filename
-btn3.addEventListener('click', ()=>{
+savebtn.addEventListener('click', ()=>{
     directoryHandle = getPath()
     directoryHandle.then(function(results){
         childHandle = window.open("prompt","Ratting","width=550,height=170,left=150,top=200,toolbar=0,status=0,")
@@ -64,6 +66,21 @@ backbtn.addEventListener('click', () => {
     window.location.assign('http://127.0.0.1:5001/front')
 })
 
+clear.addEventListener('click', () => {
+    if(!saved){
+        saveStop = window.open("not_saved","Ratting","width=550,height=170,left=150,top=200,toolbar=0,status=0,")
+        window.addEventListener('message', function(r){
+            if(r.data === 'goback'){
+                return null
+            }else{
+                output.innerHTML = ''
+            }
+        }, false)
+    }else{
+        output.innerHTML = ''
+    }
+})
+
 // Handle new data as it comes in
 var position=0
 function handleNewData(){
@@ -77,6 +94,7 @@ function handleNewData(){
         item.textContent=value
         item.className=String(anom)
         output.appendChild(item);
+        packetCount.innerHTML=String(output.childElementCount)
     })
     position = messages.length-1;
 }
@@ -87,20 +105,20 @@ var timer = setInterval(function() {
     if(xhr.readyState===XMLHttpRequest.DONE) {
         latest.textContent = 'Stopped';
     } 
-    // else if(xhr.readyState===3 && loading){
-    //     loading = false
-    //     loader = document.getElementById('loader')
-    //     loader.remove()
-    // }
-    // else if(xhr.readyState===2 && !loading){
-    //     loading=true
-    //     var loader = document.createElement('div')
-    //     loader.className = 'loader'
-    //     loader.id = 'loader'
-    //     box.appendChild(loader)
-    // }   
+    else if(xhr.readyState!==XMLHttpRequest.OPENED && loading){
+        loading = false
+        loader = document.getElementById('loader')
+        loader.remove()
+    }
+    else if(xhr.readyState===XMLHttpRequest.OPENED && !loading){
+        loading=true
+        var loader = document.createElement('div')
+        loader.className = 'loader'
+        loader.id = 'loader'
+        box.appendChild(loader)
+    }   
     handleNewData()
-})
+}, 250)
 
 // Get the directory to save in
 async function getPath(){
@@ -112,6 +130,7 @@ async function getPath(){
         console.log(e)
     }
 }
+
 // Run the Network traffic
 function run(){
     output.innerHTML = ''

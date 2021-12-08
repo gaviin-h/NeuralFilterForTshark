@@ -42,6 +42,9 @@ li{
     color: rgb(41, 44, 41);
 }
 .loader {
+    position: absolute;
+    left: 350px;
+    top: 350px;
     border: 16px solid blanchedalmond; /* Light grey */
     border-top: 16px solid rgb(212, 67, 67); /* Blue */
     border-radius: 50%;

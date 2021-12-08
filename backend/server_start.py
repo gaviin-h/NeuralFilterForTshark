@@ -17,7 +17,7 @@ app = Flask(__name__, template_folder='../gui', static_folder='../gui')
 # base route
 @app.route('/')
 def home():
-    return render_template('index2.html')
+    return render_template('index2.html', active_net=active_net.split('/')[-1])
 
 # Runs tshark when a GET request is recieves
 @app.route('/run', methods=['GET', 'POST'])

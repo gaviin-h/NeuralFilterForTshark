@@ -20,12 +20,13 @@
 
     <button value='Stop' id='btn2' type='button'>Stop</button>
     <button value='Save' id='btn3' type='button'>Save</button>
+    <button value='Clear' id='btn4' type='button'>Clear</button>
 </div>
 <div id='right'> 
     <p>This is the latest output: <span id="latest"></span></p>
-    <p>This is all the output:</p>
+    <p>total packets exammend: <span id="packetcount"></span></p>
     <br><br><br>
-    <p id='net_name'></p>
+    <p id='net_name'>active neural net: {{ active_net }}</p>
     <br>
     <div class='listbox-area' id='listbox'>
         <span id='ss_elem'>
