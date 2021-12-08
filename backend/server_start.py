@@ -25,7 +25,7 @@ def run():
     # Generates the tshark output 
     def generate():
         global go_ahead
-        ifnet=load('../backend/models/net_one.joblib')
+        ifnet=load(active_net)
         from tokenizer import tokenize_n
         p=Tshark()
         proc=p.start(g_iface)
@@ -84,8 +84,13 @@ def load_net():
     # file.writelines(text)
     # file.close()
     global active_net
-    active_net = '/Users/gavin/Desktop/CBU/'+str(name)
+    active_net = '../backend/models/'+str(name)
     return active_net
+
+# prompt window
+@app.route('/prompt')
+def prompt():
+    return render_template('prompt.html')
 
 # For testing purposes
 @app.route('/stream', methods=['GET'])
@@ -96,6 +101,14 @@ def stream():
             sleep(1)
     return app.response_class(generate(), mimetype="text/plain")
 
+@app.route('/front')
+def front():
+    return render_template('front.html')
+
+@app.route('/not_saved')
+def not_saved():
+    return render_template('not_saved.html')
+    
 # start the server
 if __name__ == "__main__":
     subprocess.run(['sh', '../backend/killer.sh'])

@@ -1,16 +1,5 @@
 let btn = document.querySelector('#btn')
-var {PythonShell} = require('python-shell');
 let xhr = new XMLHttpRequest
-
-// Start the server 
-function startServer(){ // no input value to this function where does it come from 
-    let options = {
-        arguments: ['runserver']
-    }
-    PythonShell.run('../backend/server_start.py', options, function(err, results){
-        if (err) console.log(err, results)
-    }); 
-}
 
 // Get the name for the file
 async function getFile(){
@@ -26,17 +15,15 @@ let fileHandle
 let fileData
 let file
 let text
-let name
-
+let filename
 // Post the net to the server
 btn.addEventListener('click', () => {
-    startServer()
     fileHandle = getFile()
     fileHandle.then(function(results) {
         fileData = results[0].getFile()
         fileData.then(function(result){
             file = result
-            name = file.name
+            filename = file.name
             file.text().then(function(r) {
                 text = r
                 xhr.open('POST', 'http://127.0.0.1:5001/load', false)
@@ -52,7 +39,7 @@ btn.addEventListener('click', () => {
                         }
                     }
                 }
-                xhr.send('name=' + name + '&file_data=' + text)
+                xhr.send('name=' + filename + '&file_data=' + text)
             })
         })  
 

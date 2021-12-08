@@ -1,0 +1,18 @@
+<body>
+    <p id="filename"></p>
+    <p>
+        <input type = "button" id="goback" value="Go Back" onclick="back()">
+        <input type = "button" value="nope" value='nope' onclick="nope()">
+    </p>
+    
+    <script>
+    function nope() {
+        window.opener.postMessage(document.getElementById('nope').value, '*')
+        this.close();
+    }
+    function back() {
+        window.opener.postMessage(document.getElementById('goback').value, '*')
+        this.close();
+    }
+    </script>
+</body>

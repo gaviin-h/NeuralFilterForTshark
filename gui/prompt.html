@@ -1,0 +1,18 @@
+<body>
+    <p id="filename"></p>
+    <p>
+        <input type = "text" id="data" value="untitled.txt">
+        <input type = "button" id="ok" value="OK" onclick="response()">
+        <input type = "button" value="Cancel" onclick="cancel()">
+    </p>
+    
+    <script>
+    function cancel() {
+      this.close();
+    }
+    function response() {
+        window.opener.postMessage(document.getElementById('data').value, '*')
+        this.close();
+    }
+    </script>
+</body>
