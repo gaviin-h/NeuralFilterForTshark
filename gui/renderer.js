@@ -1,4 +1,4 @@
-let btn = document.querySelector('#btn')
+let btn = document.querySelector('#choose')
 var {PythonShell} = require('python-shell');
 let xhr = new XMLHttpRequest
 

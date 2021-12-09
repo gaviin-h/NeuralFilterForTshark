@@ -1,6 +1,40 @@
+<head>
+    <style>
+        html{
+             background-color: rgb(41, 44, 41);
+            }
+        #filename{
+        color: rgb(181, 209, 181);
+        font-family: sans-serif;
+        }
+        #in{
+        color:rgb(41, 44, 41);
+        font-family: sans-serif;
+        }
+        input[type='button']{
+            color:rgb(41, 44, 41);
+            outline: 0;
+            touch-action: manipulation;
+            background-color: rgb(212, 67, 67);
+            background-image: radial-gradient(ellipse at center, rgb(212, 67, 67) 30%, rgba(212, 67, 67, .3) 100%);    
+            font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            border-radius: 6px;
+            border: none;
+            text-align: center;
+        }
+        input[type='text']{
+            background-color:rgb(181, 209, 181);
+            font-family: sans-serif;
+        }
+        button:focus {
+            box-shadow: inset 0px 0.8px 0px -0.25px rgba(212, 67, 67, .2), 0px 0.5px 1.5px rgba(212, 67, 67, .25), 0px 0px 0px 3.5px rgba(212, 67, 67, .5);
+            outline: 0;
+        }
+    </style>
+</head>
 <body>
-    <p id="filename"></p>
-    <p>
+    <p id="filename">Enter a filename:</p>
+    <p id='in'>
         <input type = "text" id="data" value="untitled.txt">
         <input type = "button" id="ok" value="OK" onclick="response()">
         <input type = "button" value="Cancel" onclick="cancel()">

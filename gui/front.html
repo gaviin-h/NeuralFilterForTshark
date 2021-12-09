@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block body %}     
-        <p>Welcome!</p>
+        <p>Welcome! Chose a Neural Filter to continue...</p>
         <p id='update'></p>
         <br>
-        <button id='btn' type='button'>Choose Net</button>
+        <button id='choose' type='button'>Choose Net</button>
         <script src="{{ url_for('static', filename='renderer2.js') }}"></script>
 {% endblock %}

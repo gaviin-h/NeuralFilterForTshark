@@ -2,7 +2,6 @@ let btn = document.getElementById('btn')
 let btn2 = document.getElementById('btn2')
 let token = document.getElementById('token')
 let iface = document.getElementById('interface')
-let latest = document.getElementById('latest')
 let output = document.getElementById('ss_elem_list')
 let savebtn = document.getElementById('btn3')
 let box = document.getElementById('ss_elem')
@@ -23,11 +22,11 @@ let play
 btn.addEventListener('click', () => {
     if(!saved){
         // prompt user about the unsaved data
-        saveStop = window.open("not_saved","Ratting","width=550,height=170,left=150,top=200,toolbar=0,status=0,")
+        saveStop = window.open("not_saved","Ratting","width=550,height=170,left=600,top=450,toolbar=0,status=0,")
         window.addEventListener('message', function(r){
             if(r.data === 'goback'){
-                return null
-            }else{
+                return;
+            }else if(r.data === 'nope'){
                 run()
             }
         }, false)
@@ -50,7 +49,7 @@ let filename
 savebtn.addEventListener('click', ()=>{
     directoryHandle = getPath()
     directoryHandle.then(function(results){
-        childHandle = window.open("prompt","Ratting","width=550,height=170,left=150,top=200,toolbar=0,status=0,")
+        childHandle = window.open("prompt","Ratting","width=550,height=170,left=600,top=450,toolbar=0,status=0,")
         window.addEventListener('message', function(r){
             filename=r.data
             save.open('POST', 'save')
@@ -68,16 +67,20 @@ backbtn.addEventListener('click', () => {
 
 clear.addEventListener('click', () => {
     if(!saved){
-        saveStop = window.open("not_saved","Ratting","width=550,height=170,left=150,top=200,toolbar=0,status=0,")
+        saveStop = window.open("not_saved","Ratting","width=550,height=170,left=600,top=450,toolbar=0,status=0,")
         window.addEventListener('message', function(r){
             if(r.data === 'goback'){
-                return null
-            }else{
+                return;
+            }else if(r.data === 'nope'){
                 output.innerHTML = ''
+                packetCount.innerHTML=''
+                saved=true
             }
         }, false)
     }else{
         output.innerHTML = ''
+        packetCount.innerHTML=''
+        saved=true
     }
 })
 
@@ -89,7 +92,6 @@ function handleNewData(){
         let anom=false
         if(value[0]==='0'){anom=true}
         value=String(value).substring(3,value.length-2)
-        latest.textContent = value
         var item = document.createElement('li')
         item.textContent=value
         item.className=String(anom)
@@ -101,11 +103,8 @@ function handleNewData(){
 
 // Listen for updates 
 var loading = false
-var timer = setInterval(function() {
-    if(xhr.readyState===XMLHttpRequest.DONE) {
-        latest.textContent = 'Stopped';
-    } 
-    else if(xhr.readyState!==XMLHttpRequest.OPENED && loading){
+var timer = setInterval(function() { 
+    if(xhr.readyState!==XMLHttpRequest.OPENED && loading){
         loading = false
         loader = document.getElementById('loader')
         loader.remove()

@@ -1,4 +1,4 @@
-let btn = document.querySelector('#btn')
+let btn = document.querySelector('#choose')
 let xhr = new XMLHttpRequest
 
 // Get the name for the file

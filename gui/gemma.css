@@ -1,14 +1,16 @@
 p{
-    color: white;
+    color: rgb(181, 209, 181);
+    font-family: sans-serif;
 }
 h1{
     color: rgb(212, 67, 67);
     text-shadow: 3px, 3px, 1px grey;
+    font-family: sans-serif;
 }
 html{
     background-color: rgb(41, 44, 41);
 }
-div{
+#top{
     background-color: rgba(190, 69, 69, 0.199);
     border: 5px rgba(190, 69, 69);
     height: 100px;
@@ -25,12 +27,13 @@ div{
     height: 300px;
     width: 600px;
     overflow: scroll;
-    background-color: blanchedalmond;
-    padding-top: 20px;
-    border: 1px solid rgba(190, 69, 69)
+    background-color: rgba(210, 220, 210, 0.9);
+    padding-top: 10px;
+    border: 2px solid rgba(190, 69, 69)
 }
 #ss_elem{
-    height: 30px;
+    font-family: sans-serif;
+    color:rgb(41, 44, 41);
 }
 li{
     list-style-type: none;
@@ -45,7 +48,7 @@ li{
     position: absolute;
     left: 350px;
     top: 350px;
-    border: 16px solid blanchedalmond; /* Light grey */
+    border: 16px solid rgb(181, 209, 181); /* Light grey */
     border-top: 16px solid rgb(212, 67, 67); /* Blue */
     border-radius: 50%;
     width: 120px;
@@ -56,3 +59,90 @@ li{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+#net{
+    color:rgb(181, 209, 181);
+    font-family: sans-serif;
+}
+#interface{
+    position: relative;
+    left: 90px;
+    top: -25px;
+    color:rgb(41, 44, 41);
+    background-color:rgb(212, 67, 67);
+    font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    text-align: center;
+    height: 20px;
+    width: 80px;
+}
+#token{
+    position: relative;
+    left: 85px;
+    background-color:rgb(212, 67, 67);
+    color:rgba(190, 69, 69, 0.199);
+}
+#frontpage{
+    position: relative;
+    left: 50px;
+}
+#choose{
+    position: absolute;
+    left: 350px;
+    top: 175px;
+}
+#btn{
+    position: absolute;
+    left: 240px;
+    top: 160px;
+}
+#btn2{
+    position: absolute;
+    left: 60px;
+    top: 250px;
+    width: 60px;
+}
+#btn3{
+    position: absolute;
+    left: 60px;
+    top: 285px;
+    width: 60px;
+}
+#btn4{
+    position: absolute;
+    left: 60px;
+    top: 320px;
+    width: 60px;
+}
+#backbtn{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+button{
+    color:rgb(41, 44, 41);
+    outline: 0;
+    touch-action: manipulation;
+    background-color: rgb(212, 67, 67);
+    background-image: radial-gradient(ellipse at center, rgb(212, 67, 67) 30%, rgba(212, 67, 67, .3) 100%);    font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+    border-radius: 6px;
+    padding: 6px 14px;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    text-align: center;
+}
+button:focus {
+  box-shadow: inset 0px 0.8px 0px -0.25px rgba(212, 67, 67, .2), 0px 0.5px 1.5px rgba(212, 67, 67, .25), 0px 0px 0px 3.5px rgba(212, 67, 67, .5);
+  outline: 0;
+}
+.net{
+    padding-right:110px;
+    float: right;
+}
+#interfacetext{
+    position: relative;
+    left: 20px;
+}
