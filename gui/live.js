@@ -30,6 +30,7 @@ btn.addEventListener('click', () => {
                 run()
             }
         }, false)
+        window.removeEventListener('message')
     }else{
         run()
     }
@@ -77,6 +78,7 @@ clear.addEventListener('click', () => {
                 saved=true
             }
         }, false)
+        window.removeEventListener('message')
     }else{
         output.innerHTML = ''
         packetCount.innerHTML=''

@@ -8,7 +8,7 @@ from joblib import load
 go_ahead=True
 g_iface=''
 g_t='n'
-data=''
+data=[]
 active_net=''
 
 # app Instantiation
@@ -29,12 +29,13 @@ def run():
         from tokenizer import tokenize_n
         p=Tshark()
         proc=p.start(g_iface)
+        global data
+        data=[]
         while True:
             line=proc.stdout.readline()
+            data.append(line)
             if not go_ahead:
                 proc.terminate()
-                global data
-                data = proc.stdout.read().split(b'\n')
                 break
             line=str(line)
             t_line=tokenize_n(line)
